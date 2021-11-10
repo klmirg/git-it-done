@@ -5,8 +5,8 @@ var userFormEl = document.querySelector("#user-form");
 var nameInputEl = document.querySelector("#username");
 
 var formSubmitHandler = function(event) {
+  // prevent page from refreshing
   event.preventDefault();
-  console.log(event);
 
   //get value from input element
   var username = nameInputEl.value.trim();
@@ -29,7 +29,9 @@ var getUserRepos = function(user) {
  .then(function(response) {
    // request was successful
    if (response.ok) {
+     console.log(response);
    response.json().then(function(data) {
+     console.log(data);
      displayRepos(data, user);
    });
   } else {
@@ -48,11 +50,11 @@ var displayRepos = function(repos, searchTerm) {
     repoContainerEl.textContent = "No repositories found.";
     return;
   }
-  repoContainerEl.textContent = "";
+  // repoContainerEl.textContent = "";
   repoSearchTerm.textContent = searchTerm;
 
   // loop over repos
-  for (let i = 0; i < repos.length; i++) {
+  for (var i = 0; i < repos.length; i++) {
     // format repo name
     var repoName = repos[i].owner.login + "/" + repos[i].name;
 
